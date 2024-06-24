@@ -1,5 +1,3 @@
 #auth tokens for send requests
-
-.http
-
-/api
+api
+*.http
