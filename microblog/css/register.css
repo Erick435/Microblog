@@ -1,0 +1,36 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#mainContainer {
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+main{
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+#imageContainer {
+    display:flex;
+    justify-content: space space-between;
+    align-items: center;
+    margin:auto;
+}
+
+
+#submitButton{
+    width:100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding:10px;
+    background-color: rgb(69, 158, 183);
+    color:white;
+}

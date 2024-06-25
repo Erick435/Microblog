@@ -1,0 +1,137 @@
+footer {
+    background-color: rgb(34, 134, 234);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Custom CSS Logo */
+#logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #3498db;
+    position: relative;
+}
+
+#logo #icon {
+    display: inline-block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #3498db;
+    border-radius: 50%;
+    position: relative;
+}
+#logo #icon::before,
+#logo #icon::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+#logo #icon::before {
+    top: 8px;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+#logo #icon::after {
+    top: 12px;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+}
+
+
+/* ONLY USED IN VIEW-ALL PAGE */
+#createButton {
+    position: sticky;
+    bottom: 5rem;
+}
+
+/* GET STARTED BUTTON */
+
+.button-63 {
+    align-items: center;
+    background-image: linear-gradient(144deg, #41b1e1, #5B42F3 50%, #1c3fc0);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    font-size: xx-small;
+    padding: 10px 0px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.button-63:active,
+.button-63:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    .button-63 {
+        font-size: 18px;
+        min-width: 150px;
+    }
+
+    #navButtons {
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .button-63 {
+        font-size: 16px;
+    }
+
+    #navButtons {
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    #headerContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #collapsibleNavId {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        
+    }
+    
+    .navbar {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar .btn {
+        margin: 5px 0;
+    }
+}
