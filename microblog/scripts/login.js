@@ -5,6 +5,6 @@
 
 window.onload = function() {
 
-
+    console.log("script is connected");
     
 }

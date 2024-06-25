@@ -13,6 +13,17 @@
 
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/login.css">
+
+        <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
+
+    <script src="../account/auth.js"></script>
+
+    <script>
+        if (isLoggedIn() === true) {
+            window.location.replace("../posts/posts.html")
+        }
+    </script>
+    
 </head>
 
 <body>
@@ -33,7 +44,7 @@
                             <a href="index.html" class="btn btn-primary" id="navButtons">Home</a>
                         </div>
                         <div class="btn btn-primary" id="navButtons">
-                            <a class="nav-link text-light px-2" href="view-all.html">View</a>
+                            <a class="nav-link text-light px-2" href="#">View</a>
                         </div>
                         <a href="login.html" class="button-63 align-items-center " role="button" id="navButtons">Get Started</a>                    </div>
                 </div>
@@ -57,7 +68,7 @@
 
 
                 <article class="container border border-2 rounded py-5" id="formContainer">
-                    <form action="index.html">
+                    <form id="login">
 
                         <div class="mb-5 text-center">
                             <h1>Sign In</h1>
@@ -66,9 +77,9 @@
                         <!---------------- USER NAME INPUT FIELD  ----------->
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control mt-4" name="cardnumber" placeholder="Card Number"
-                                id="cardNumber" required />
-                            <label for="cardnumber">
+                            <input type="text" class="form-control mt-4" name="username" placeholder=""
+                                id="username" required />
+                            <label for="username">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="25" fill="currentColor"
                                     class="bi bi-person" viewBox="0 0 16 16">
                                     <path
@@ -81,9 +92,9 @@
                         <!---------------- PASSWORD INPUT FIELD  ----------->
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" name="cardnumber" placeholder="Card Number"
-                                id="cardNumber" required />
-                            <label for="cardnumber">
+                            <input type="password" class="form-control" name="password" placeholder=""
+                                id="password" required />
+                            <label for="password">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="currentColor"
                                     class="bi bi-lock" viewBox="0 0 16 16">
                                     <path
@@ -99,7 +110,7 @@
                         </div> -->
 
                         <!---------------  SUBMIT BUTTON ------------>
-                        <button type="submit" class="btn fs-4" id="submitButton">Log In</button>
+                        <button type="submit" class="btn fs-4" id="loginButton">Log In</button>
 
                     </form>
 
@@ -200,7 +211,7 @@
 
 
 
-    <script src="login-register.js"></script>
+    <script src="../account/login.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

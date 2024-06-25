@@ -2,6 +2,15 @@
 
 "use strict";
 
+const submitButton = document.querySelector("#submitButton");
+
+
+window.onload = function() {
+
+
+  
+}
+
 const apiBaseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com";
 // Backup server:   https://microbloglite.onrender.com
 
