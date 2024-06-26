@@ -2,14 +2,6 @@
 
 "use strict";
 
-const submitButton = document.querySelector("#submitButton");
-
-
-window.onload = function() {
-
-
-  
-}
 
 const apiBaseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com";
 // Backup server:   https://microbloglite.onrender.com
@@ -54,6 +46,25 @@ function login(loginData) {
 
       return loginData;
     });
+}
+
+function register(registerData){
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(registerData),
+  };
+
+  return fetch(apiBaseURL + "/api/users", options)
+    .then((response) => response.json())
+    .then ((registerData) => {
+      window.localStorage.setItem("register-data", JSON.stringify(registerData));
+      window.location.assign("../microblog/login.html");
+
+      return registerData;
+    })
 }
 
 // This is the `logout()` function you will use for any logout button
