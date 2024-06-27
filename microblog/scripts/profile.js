@@ -9,19 +9,26 @@ const loginData = getLoginData();
 
 const createPersonalPost = document.querySelector("#createPersonalPost");
 
+const profileOptions = document.querySelector("#profileOptions");
+const createPostTab = document.querySelector("#createPostTab");
+const postsTab = document.querySelector("#postsTab");
+const likesTab = document.querySelector("#likesTab");
+
 window.onload = function () {
 
     getProfileData();
-
     logoutButton.onclick = logout;
-
     profile.onclick = profileIcon;
 
-    createPost();
+    profileShowTextField();
 
+    createPostTab.onclick = showPersonalOptions;
+    postsTab.onclick = showPersonalOptions;
+    likesTab.onclick = showPersonalOptions;
 
 }
 
+// adding the icon (header) with functionality to go to personal profile
 function profileIcon() {
 
     console.log("profileIcon() called");
@@ -45,8 +52,16 @@ function profileIcon() {
 
 }
 
-function createPost() {
+// ========================== PERSONAL PROFILE =========================
 
+// If user is in personal profile, show the text field to create a post
+function profileShowTextField() {
+
+    const existingCard = document.querySelector("#createPostCard");
+    if(existingCard){
+        return;
+    }
+    
     let id = '';
 
     if (urlParams.has("id") === true) {
@@ -68,6 +83,7 @@ function createPost() {
 
                     // create a card for the post creation
                     let card = document.createElement('div');
+                    card.id = "createPostCard"
                     card.classList.add("card");
                     card.style.backgroundColor = "#209dc9";
                     createPersonalPost.appendChild(card);
@@ -115,11 +131,15 @@ function createPost() {
                 });
         }
 
+        
+
     }
 
 }
 
-function sendPostData(message, event) {
+
+// Enter text and click submit to create a post
+function sendPostData(message) {
     
     if (message != ""){
         console.log(`Text sent: ${message}`);
@@ -149,6 +169,61 @@ function sendPostData(message, event) {
     }
     
 }
+
+
+function showPersonalPosts() {
+
+    console.log("showing personal posts...");
+    
+}
+
+function showPersonalLikes() {
+
+    console.log("showing personal likes...");
+    
+}
+
+// PERSONAL PROFILE OPTIONS (create post, show personal posts, show likes)
+function showPersonalOptions(event) {
+
+    event.preventDefault();
+
+    let id = '';
+
+    if (urlParams.has("id") === true) {
+        id = urlParams.get("id");
+        if (id == loginData.username) {
+
+            console.log("Personal user Profile: " + loginData.username);
+
+            fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${loginData.token}`
+                    },
+                },
+            )
+                .then(response => response.json())
+                .then(user => {
+
+                    // if the user clicks on the create post tab, show the text field
+                    if (event.target === createPostTab){
+                        profileShowTextField();
+                    }
+                    else if (event.target === postsTab){
+                        showPersonalPosts();
+                    }
+                    else if (event.target === likesTab){
+                        showPersonalLikes();
+                    }
+                });
+        }
+
+    }
+}
+
+// ========================= SHOW OTHER USERS PROFILES ==========================
 
 function getProfileData() {
 

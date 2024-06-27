@@ -2,8 +2,8 @@
 
 const bodyContainer = document.querySelector("#bodyContainer");
 const logoutButton = document.querySelector("#logoutButton");
-const loginData = getLoginData();
 const profile = document.querySelector("#profileIcon");
+const loginData = getLoginData();
 
 window.onload = function () {
 
