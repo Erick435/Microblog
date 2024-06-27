@@ -9,10 +9,15 @@ const loginData = getLoginData();
 
 const createPersonalPost = document.querySelector("#createPersonalPost");
 
-const profileOptions = document.querySelector("#profileOptions");
-const createPostTab = document.querySelector("#createPostTab");
-const postsTab = document.querySelector("#postsTab");
-const likesTab = document.querySelector("#likesTab");
+const profilePlacement = document.querySelector("#profilePlacement");
+const tabsContentPlacement = document.querySelector("#tabsContentPlacement");
+
+// const profileOptions = document.querySelector("#profileOptions");
+// const createPostTab = document.querySelector("#createPostTab");
+// const createContent = document.querySelector("#createPostContent");
+// const postsTab = document.querySelector("#postsTab");
+// const postsContent = document.querySelector("#postsContent");
+// const likesTab = document.querySelector("#likesTab");
 
 window.onload = function () {
 
@@ -20,11 +25,14 @@ window.onload = function () {
     logoutButton.onclick = logout;
     profile.onclick = profileIcon;
 
-    profileShowTextField();
+    showPersonalOptions();
 
-    createPostTab.onclick = showPersonalOptions;
-    postsTab.onclick = showPersonalOptions;
-    likesTab.onclick = showPersonalOptions;
+    // profileShowTextField();
+
+    // createPostTab.onclick = showPersonalOptions;
+    // postsTab.onclick = showPersonalOptions;
+    // likesTab.onclick = showPersonalOptions;
+
 
 }
 
@@ -86,7 +94,8 @@ function profileShowTextField() {
                     card.id = "createPostCard"
                     card.classList.add("card");
                     card.style.backgroundColor = "#209dc9";
-                    createPersonalPost.appendChild(card);
+
+                    createPostContent.appendChild(card);
 
                     // create body for the text fields
                     let cardBody = document.createElement('div');
@@ -130,11 +139,7 @@ function profileShowTextField() {
                     });
                 });
         }
-
-        
-
     }
-
 }
 
 
@@ -170,10 +175,68 @@ function sendPostData(message) {
     
 }
 
-
 function showPersonalPosts() {
 
     console.log("showing personal posts...");
+
+    const postsContent = document.querySelector("#postsContent");
+    postsContent.innerText = "";
+    
+    const options = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${loginData.token}`
+        },
+    };
+
+    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts?username=" + loginData.username, options)
+        .then((response) => response.json())
+        .then((posts) => {
+
+            for (let post of posts) {
+
+                // create div for bootstrap card
+                let cardContainer = document.createElement("div");
+                cardContainer.classList.add("card");
+                cardContainer.classList.add("my-4");
+                cardContainer.style.width = "31rem";
+                postsContent.appendChild(cardContainer)
+
+                // create div for card body inside card container
+                let cardBody = document.createElement("div");
+                cardBody.classList.add("card-body");
+                cardContainer.appendChild(cardBody);
+
+                // Link to the profile page
+                let profilePage = document.createElement("a")
+                profilePage.href = "../microblog/profile.html?id=" + post.username;
+                cardBody.appendChild(profilePage);
+
+                // create card title h4
+                let cardTitle = document.createElement("h4");
+                cardTitle.classList.add("card-title");
+                cardTitle.classList.add("my-2");
+                cardTitle.classList.add("text-primary");
+                cardTitle.innerText = `@${post.username}`;
+                profilePage.appendChild(cardTitle);
+
+
+                // create card main text
+                let mainText = document.createElement("h2");
+                mainText.classList.add("card-text");
+                mainText.classList.add("my-4");
+                mainText.innerText = `${post.text}`;
+                cardBody.appendChild(mainText);
+
+                // show the timestamp Date when created 
+                let dateCreated = document.createElement("h6");
+                dateCreated.classList.add("sub-title");
+                dateCreated.classList.add("text-muted");
+                dateCreated.classList.add("my-3");
+                dateCreated.innerText = `Created at: ${post.createdAt.split('T')[0]}`;
+                cardBody.appendChild(dateCreated);
+            }
+        })
     
 }
 
@@ -184,10 +247,8 @@ function showPersonalLikes() {
 }
 
 // PERSONAL PROFILE OPTIONS (create post, show personal posts, show likes)
-function showPersonalOptions(event) {
-
-    event.preventDefault();
-
+function showPersonalOptions() {
+    
     let id = '';
 
     if (urlParams.has("id") === true) {
@@ -207,19 +268,158 @@ function showPersonalOptions(event) {
                 .then(response => response.json())
                 .then(user => {
 
-                    // if the user clicks on the create post tab, show the text field
-                    if (event.target === createPostTab){
+    // ======================= NAV TABS FOR PERSONAL PROFILE =============================
+                    let profileOptionsContainer = document.createElement("div");
+                    profileOptionsContainer.id = "profileOptions";
+                    profileOptionsContainer.classList.add("my-4");
+                    profilePlacement.appendChild(profileOptionsContainer);
+
+                    // unordered list for nav tabs
+                    let ulNavTabs = document.createElement("ul");
+                    ulNavTabs.classList.add("nav");
+                    ulNavTabs.classList.add("nav-tabs");
+                    ulNavTabs.classList.add("d-flex");
+                    ulNavTabs.classList.add("justify-content-center");
+                    ulNavTabs.id = "myTab";
+                    ulNavTabs.role = "tablist";
+                    profileOptionsContainer.appendChild(ulNavTabs);
+                    
+                    // list item for create Post
+        // LIST ITEM AND BUTTON FOR CREATE POST TABLE
+                    let createPostItem = document.createElement("li");
+                    createPostItem.classList.add("nav-item");
+                    createPostItem.role = "presentation";
+                    ulNavTabs.appendChild(createPostItem);
+
+                    // button for create post item
+                    let createPostButton = document.createElement("button");
+                    createPostButton.classList.add("nav-link");
+                    createPostButton.classList.add("active");
+                    createPostButton.classList.add("fs-5");
+                    createPostButton.id = "createPostTab";
+                    createPostButton.setAttribute("data-bs-toggle", "tab");
+                    createPostButton.setAttribute("data-bs-target", "#createPostContent");
+                    createPostButton.type = "button";
+                    createPostButton.innerText = "Create Post";
+                    createPostItem.appendChild(createPostButton);
+
+                    // list item for show personal posts
+        // LIST ITEM AND BUTTON FOR POSTS
+                    let showPostsButton = document.createElement("li");
+                    showPostsButton.classList.add("nav-item");
+                    showPostsButton.role = "presentation";
+                    ulNavTabs.appendChild(showPostsButton);
+
+                    let postsButton = document.createElement("button");
+                    postsButton.classList.add("nav-link");
+                    postsButton.classList.add("fs-5");
+                    postsButton.id = "postsTab";
+                    postsButton.setAttribute("data-bs-toggle", "tab");
+                    postsButton.setAttribute("data-bs-target", "#postsContent");
+                    postsButton.type = "button";
+                    postsButton.innerText = "Posts";
+                    showPostsButton.appendChild(postsButton);
+
+                    // List item for showing personal Likes button
+        // LIST ITEM AND BUTTON FOR LIKES
+                    let showLikesItems = document.createElement("li");
+                    showLikesItems.classList.add("nav-item");
+                    showLikesItems.role = "presentation";
+                    ulNavTabs.appendChild(showLikesItems);
+
+                    let likesButton = document.createElement("button");
+                    likesButton.classList.add("nav-link");
+                    likesButton.classList.add("fs-5");
+                    likesButton.id = "likesTab";
+                    likesButton.setAttribute("data-bs-toggle", "tab");
+                    likesButton.setAttribute("data-bs-target", "#likesContent");
+                    likesButton.type = "button";
+                    likesButton.innerText = "Likes";
+                    showLikesItems.appendChild(likesButton);
+
+    //  ======================== TAB CONTENT ==============================
+                    
+                    // div to contain ALL content
+                    let tabContent = document.createElement("div");
+                    tabContent.classList.add("tab-content");
+                    tabsContentPlacement.appendChild(tabContent);
+
+            // CREATE A DIV TO SHOW CREATE POST CONTENT
+                    let showCreatePostContent = document.createElement("div");
+                    showCreatePostContent.classList.add("tab-pane");
+                    showCreatePostContent.classList.add("fade");
+                    showCreatePostContent.classList.add("show");
+                    showCreatePostContent.classList.add("active");
+                    showCreatePostContent.id = "createPostContent";
+                    showCreatePostContent.role = "tabpanel";
+                    tabContent.appendChild(showCreatePostContent);
+
+                    // create div for content
+                    let createPostContentDiv = document.createElement("div");
+                    createPostContentDiv.id = "createPersonalPost";
+                    showCreatePostContent.appendChild(createPostContentDiv);
+
+            
+            // CREATE A DIV TO SHOW POSTS CONTENT
+                    let showPostsContent = document.createElement("div");
+                    showPostsContent.classList.add("tab-pane");
+                    showPostsContent.classList.add("fade");
+                    showPostsContent.classList.add("d-flex");
+                    showPostsContent.classList.add("flex-column");
+                    showPostsContent.classList.add("align-items-center");
+                    showPostsContent.id = "postsContent";
+                    showPostsContent.role = "tabpanel";
+                    tabContent.appendChild(showPostsContent);
+
+                    // create a div for posts content
+                    let postsContentDiv = document.createElement("div");
+                    postsContentDiv.id = "showPersonalPost";
+                    showPostsContent.appendChild(postsContentDiv);
+
+            // CREATE A DIV TO SHOW PERSONAL LIKES CONTENT
+                    let showPersonalLikesContent = document.createElement("div");
+                    showPersonalLikesContent.classList.add("tab-pane");
+                    showPersonalLikesContent.classList.add("fade");
+                    showPersonalLikesContent.classList.add("show");
+                    showPersonalLikesContent.classList.add("active");
+                    showPersonalLikesContent.id = "likesContent";
+                    showPostsContent.role = "tabpanel";
+                    tabContent.appendChild(showPersonalLikesContent);
+
+                    // create a div for posts content
+                    let likesContentDiv = document.createElement("div");
+                    postsContentDiv.id = "showPersonalLikes";
+                    showPersonalLikesContent.appendChild(likesContentDiv);
+    
+                    createPostButton.addEventListener("click", () => {
                         profileShowTextField();
-                    }
-                    else if (event.target === postsTab){
+                    });
+
+                    postsButton.addEventListener("click", () => {
                         showPersonalPosts();
-                    }
-                    else if (event.target === likesTab){
+                    });
+
+                    likesButton.addEventListener("click", () => {
                         showPersonalLikes();
-                    }
+                    });
+                    
+
+                    // show text field (create post) on startup
+                    profileShowTextField();
+                    
+                    
+                    // if the user clicks on the create post tab, show the text field
+                    // if (event.target === createPostTab){
+                    //     profileShowTextField();
+                    // }
+                    // else if (event.target === postsTab){
+                    //     showPersonalPosts();
+                    // }
+                    // else if (event.target === likesTab){
+                    //     showPersonalLikes();
+                    // }
                 });
         }
-
     }
 }
 
@@ -303,10 +503,6 @@ function getProfileData() {
                 userBio.classList.add("text-secondary");
                 userBio.classList.add("text-center");
                 cardBody.appendChild(userBio);
-
             })
-
     }
-
-
 }
