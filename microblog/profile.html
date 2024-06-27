@@ -11,23 +11,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../microblog/css/index.css
-    ">
+    <link rel="stylesheet" href="css/index.css">
 
     <script src="../account/auth.js"></script>
     <script>
-        if (!isLoggedIn()){
+        if (!isLoggedIn()) {
             window.location.replace("../microblog/login.html")
         }
     </script>
-    
+
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-white" style="background-color: #e3f2fd;">
             <div class="container" id="headerContainer">
-                <a class="navbar-brand" href="home.html" id="logoLink">
+                <a class="navbar-brand" href="../posts/posts.html" id="logoLink">
                     <div id="logo-container">
                         <div id="logo">
                             <div id="icon"></div>
@@ -37,19 +36,24 @@
                 </a>
                 <div class="collapse navbar-collapse container d-flex justify-content-end" id="collapsibleNavId">
                     <div class="navbar m-3">
-                        <div id="homeButton">
+                        <!-- <div id="homeButton">
                             <a href="index.html" class="btn btn-primary ">Home</a>
+                        </div> -->
+                        <div class="btn btn-primary" id="viewButton">
+                            <a class="nav-link text-light px-1 " href="../posts/posts.html">All Posts</a>
                         </div>
                         <div class="btn btn-primary" id="logoutButton">
                             <a class="nav-link text-light px-1">Logout</a>
                         </div>
                         <div style="cursor: pointer;">
-                          <a id="profileIcon" class="mx-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-                            </svg>
-                          </a>
+                            <a id="profileIcon" class="mx-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor"
+                                    class="bi bi-person-square" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path
+                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -59,8 +63,17 @@
 
 
 
-    <main class="container my-5 d-flex align-items-center flex-column" id="bodyContainer">
+    <main class="container">
 
+
+
+        <div id="profileContainer" class="my-5">
+
+        </div>
+
+        <div id="createPersonalPost" class="my-5">
+
+        </div>
 
     </main>
 
@@ -145,7 +158,7 @@
     </footer>
 
 
-    <script src="../posts/posts.js"></script>
+    <script src="/microblog/scripts/profile.js"></script>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
