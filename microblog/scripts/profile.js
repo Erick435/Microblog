@@ -3,8 +3,9 @@
 const urlParams = new URLSearchParams(location.search);
 const profileContainer = document.querySelector("#profileContainer");
 const logoutButton = document.querySelector("#logoutButton");
-const loginData = getLoginData();
 const profile = document.querySelector("#profileIcon");
+
+const loginData = getLoginData();
 
 const createPersonalPost = document.querySelector("#createPersonalPost");
 
@@ -18,7 +19,6 @@ window.onload = function () {
 
     createPost();
 
-    // submitButton.onclick = console.log("submit button clicked: " + cardText.value)
 
 }
 
@@ -84,12 +84,6 @@ function createPost() {
                     cardTitle.innerText = "What's on your mind?";
                     cardBody.appendChild(cardTitle);
 
-                    // Create a form for the text and button
-                    let form = document.createElement("form");
-                    form.id = "form";
-                    form.action = "../microblog/profile.html?id=" + loginData.username;
-                    cardBody.appendChild(form);
-                    
                     // create text area for the card body
                     let cardText = document.createElement("textarea");
                     cardText.classList.add("card-text");
@@ -98,12 +92,12 @@ function createPost() {
                     cardText.classList.add("my-5");
                     cardText.required = true;
                     cardText.rows = 5;
-                    form.appendChild(cardText);
+                    cardBody.appendChild(cardText);
 
                     // create div for button
                     let buttonDiv = document.createElement("div");
                     buttonDiv.classList.add("text-center");
-                    form.appendChild(buttonDiv);
+                    cardBody.appendChild(buttonDiv);
                     
                     // create submit button to post
                     let submitButton = document.createElement("button");
@@ -114,8 +108,9 @@ function createPost() {
                     submitButton.innerText = "Create Post";
                     buttonDiv.appendChild(submitButton);
                     
-                    submitButton.addEventListener("click", () => {
-                        getPostData(cardText.value);
+                    submitButton.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        sendPostData(cardText.value);
                     });
                 });
         }
@@ -124,12 +119,33 @@ function createPost() {
 
 }
 
-function getPostData(text, event) {
+function sendPostData(message, event) {
+    
+    if (message != ""){
+        console.log(`Text sent: ${message}`);
 
-    if (text != ""){
-        event.preventDefault();
-        console.log(`Text sent: ${text}`);
+        // send request to post message
+        let bodyData = {
+            "text": `${message}`
+        }
         
+        fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loginData.token}`
+                },
+                body: JSON.stringify(bodyData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.assign("../posts/posts.html")
+            })
+        
+    }
+    else{
+        alert("A value must be provided in the Text field");
     }
     
 }
