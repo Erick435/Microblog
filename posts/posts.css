@@ -1,1 +1,9 @@
 /* Posts Page CSS */
+
+#scrollButton{
+    position: fixed;
+    bottom: 4em;
+    right: 4em;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+}

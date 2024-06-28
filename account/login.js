@@ -2,6 +2,7 @@
 
 "use strict";
 
+
 const loginForm = document.querySelector("#login");
 
 loginForm.onsubmit = function (event) {
@@ -22,3 +23,4 @@ loginForm.onsubmit = function (event) {
     // Time to actually process the login using the function from auth.js!
     login(loginData);
 };
+

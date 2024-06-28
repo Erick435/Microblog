@@ -73,8 +73,8 @@ a {
     font-family: Phantomsans, sans-serif;
     justify-content: center;
     line-height: 1em;
-    max-width: 100%;
-    min-width: 140px;
+    max-width: 25em;
+    min-width: 120px;
     font-size: xx-small;
     padding: 10px 0px;
     text-decoration: none;
@@ -88,33 +88,6 @@ a {
 .button-63:active,
 .button-63:hover {
     outline: 0;
-}
-
-/* SCREEN RESPONSIVE */
-
-/* @media (min-width: 499px) {
-    
-
-    #homeButton {
-        margin: 0 10px;
-    }
-} */
-
-@media (max-width: 767px) {
-    .button-63 {
-        font-size: 18px;
-        min-width: 150px;
-    }
-
-    #homeButton {
-        margin: 0 10px;
-    }
-    #viewButton {
-        margin: 0 10px;
-    }
-    #getStartedButton {
-        margin: 0 10px;
-    }
 }
 
 
@@ -132,13 +105,10 @@ a {
         
     }
 
-    .button-63 {
-        font-size: 18px;
-    }
 
-    #homeButton {
+    /* #homeButton {
         margin: 0 15px;
-    }
+    } */
     #viewButton {
         margin: 0 15px;
     }
@@ -158,14 +128,10 @@ a {
 }
 
 @media (min-width: 992px){
-    #homeButton {
+    /* #homeButton {
         margin: 0 20px;
-    }
+    } */
     #viewButton {
         margin: 0 20px;
-    }
-    #getStartedButton {
-        margin: 0 20px;
-        font-size: 18px;
     }
 }

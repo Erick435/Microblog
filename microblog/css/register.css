@@ -25,6 +25,10 @@ main{
     margin:auto;
 }
 
+#formContainer {
+    box-shadow: 4px 10px 10px black;
+}
+
 
 #registerButton{
     width:100%;
