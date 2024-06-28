@@ -5,19 +5,12 @@ const profileContainer = document.querySelector("#profileContainer");
 const logoutButton = document.querySelector("#logoutButton");
 const profile = document.querySelector("#profileIcon");
 
-const loginData = getLoginData();
-
 const createPersonalPost = document.querySelector("#createPersonalPost");
 
 const profilePlacement = document.querySelector("#profilePlacement");
 const tabsContentPlacement = document.querySelector("#tabsContentPlacement");
 
-// const profileOptions = document.querySelector("#profileOptions");
-// const createPostTab = document.querySelector("#createPostTab");
-// const createContent = document.querySelector("#createPostContent");
-// const postsTab = document.querySelector("#postsTab");
-// const postsContent = document.querySelector("#postsContent");
-// const likesTab = document.querySelector("#likesTab");
+const loginData = getLoginData();
 
 window.onload = function () {
 
@@ -27,19 +20,10 @@ window.onload = function () {
 
     showPersonalOptions();
 
-    // profileShowTextField();
-
-    // createPostTab.onclick = showPersonalOptions;
-    // postsTab.onclick = showPersonalOptions;
-    // likesTab.onclick = showPersonalOptions;
-
-
 }
 
 // adding the icon (header) with functionality to go to personal profile
 function profileIcon() {
-
-    console.log("profileIcon() called");
 
     const options = {
         method: "GET",
@@ -55,9 +39,6 @@ function profileIcon() {
             window.location.href = "../microblog/profile.html?id=" + loginData.username;
 
         })
-
-    console.log(loginData.username);
-
 }
 
 // ========================== PERSONAL PROFILE =========================
@@ -75,8 +56,6 @@ function profileShowTextField() {
     if (urlParams.has("id") === true) {
         id = urlParams.get("id");
         if (id == loginData.username) {
-
-            console.log("Personal user Profile: " + loginData.username);
 
             fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
                 {
@@ -142,12 +121,10 @@ function profileShowTextField() {
     }
 }
 
-
 // Enter text and click submit to create a post
 function sendPostData(message) {
     
     if (message != ""){
-        console.log(`Text sent: ${message}`);
 
         // send request to post message
         let bodyData = {
@@ -176,8 +153,6 @@ function sendPostData(message) {
 }
 
 function showPersonalPosts() {
-
-    console.log("showing personal posts...");
 
     const postsContent = document.querySelector("#postsContent");
     postsContent.innerText = "";
@@ -240,12 +215,6 @@ function showPersonalPosts() {
     
 }
 
-function showPersonalLikes() {
-
-    console.log("showing personal likes...");
-    
-}
-
 // PERSONAL PROFILE OPTIONS (create post, show personal posts, show likes)
 function showPersonalOptions() {
     
@@ -254,8 +223,6 @@ function showPersonalOptions() {
     if (urlParams.has("id") === true) {
         id = urlParams.get("id");
         if (id == loginData.username) {
-
-            console.log("Personal user Profile: " + loginData.username);
 
             fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
                 {
@@ -320,23 +287,6 @@ function showPersonalOptions() {
                     postsButton.innerText = "Posts";
                     showPostsButton.appendChild(postsButton);
 
-                    // List item for showing personal Likes button
-        // LIST ITEM AND BUTTON FOR LIKES
-                    let showLikesItems = document.createElement("li");
-                    showLikesItems.classList.add("nav-item");
-                    showLikesItems.role = "presentation";
-                    ulNavTabs.appendChild(showLikesItems);
-
-                    let likesButton = document.createElement("button");
-                    likesButton.classList.add("nav-link");
-                    likesButton.classList.add("fs-5");
-                    likesButton.id = "likesTab";
-                    likesButton.setAttribute("data-bs-toggle", "tab");
-                    likesButton.setAttribute("data-bs-target", "#likesContent");
-                    likesButton.type = "button";
-                    likesButton.innerText = "Likes";
-                    showLikesItems.appendChild(likesButton);
-
     //  ======================== TAB CONTENT ==============================
                     
                     // div to contain ALL content
@@ -344,7 +294,7 @@ function showPersonalOptions() {
                     tabContent.classList.add("tab-content");
                     tabsContentPlacement.appendChild(tabContent);
 
-            // CREATE A DIV TO SHOW CREATE POST CONTENT
+    // ========================= CREATE A DIV TO SHOW CREATE POST CONTENT
                     let showCreatePostContent = document.createElement("div");
                     showCreatePostContent.classList.add("tab-pane");
                     showCreatePostContent.classList.add("fade");
@@ -360,7 +310,7 @@ function showPersonalOptions() {
                     showCreatePostContent.appendChild(createPostContentDiv);
 
             
-            // CREATE A DIV TO SHOW POSTS CONTENT
+    // ========================= CREATE A DIV TO SHOW POSTS CONTENT
                     let showPostsContent = document.createElement("div");
                     showPostsContent.classList.add("tab-pane");
                     showPostsContent.classList.add("fade");
@@ -375,22 +325,9 @@ function showPersonalOptions() {
                     let postsContentDiv = document.createElement("div");
                     postsContentDiv.id = "showPersonalPost";
                     showPostsContent.appendChild(postsContentDiv);
-
-            // CREATE A DIV TO SHOW PERSONAL LIKES CONTENT
-                    let showPersonalLikesContent = document.createElement("div");
-                    showPersonalLikesContent.classList.add("tab-pane");
-                    showPersonalLikesContent.classList.add("fade");
-                    showPersonalLikesContent.classList.add("show");
-                    showPersonalLikesContent.classList.add("active");
-                    showPersonalLikesContent.id = "likesContent";
-                    showPostsContent.role = "tabpanel";
-                    tabContent.appendChild(showPersonalLikesContent);
-
-                    // create a div for posts content
-                    let likesContentDiv = document.createElement("div");
-                    postsContentDiv.id = "showPersonalLikes";
-                    showPersonalLikesContent.appendChild(likesContentDiv);
     
+
+        // ================ HANDLES FUNCTION TO CREATE POST OR SHOW POSTS ==========
                     createPostButton.addEventListener("click", () => {
                         profileShowTextField();
                     });
@@ -399,40 +336,23 @@ function showPersonalOptions() {
                         showPersonalPosts();
                     });
 
-                    likesButton.addEventListener("click", () => {
-                        showPersonalLikes();
-                    });
-                    
 
                     // show text field (create post) on startup
                     profileShowTextField();
-                    
-                    
-                    // if the user clicks on the create post tab, show the text field
-                    // if (event.target === createPostTab){
-                    //     profileShowTextField();
-                    // }
-                    // else if (event.target === postsTab){
-                    //     showPersonalPosts();
-                    // }
-                    // else if (event.target === likesTab){
-                    //     showPersonalLikes();
-                    // }
+
                 });
         }
     }
 }
 
-// ========================= SHOW OTHER USERS PROFILES ==========================
 
+// ========================= SHOW OTHER USERS PROFILES ==========================
 function getProfileData() {
 
     let id = '';
 
     if (urlParams.has("id") === true) {
         id = urlParams.get("id");
-
-        console.log("id: " + id);
 
         fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
             {
