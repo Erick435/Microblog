@@ -31,7 +31,7 @@ function profileIcon() {
             Authorization: `Bearer ${loginData.token}`
         },
     };
-    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", options)
+    fetch("https://microbloglite.onrender.com/api/posts", options)
         .then((response) => response.json())
         .then((userIcon) => {
 
@@ -57,7 +57,7 @@ function profileShowTextField() {
         id = urlParams.get("id");
         if (id == loginData.username) {
 
-            fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
+            fetch("https://microbloglite.onrender.com/api/users/" + id,
                 {
                     method: "GET",
                     headers: {
@@ -131,7 +131,7 @@ function sendPostData(message) {
             "text": `${message}`
         }
         
-        fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/",
+        fetch("https://microbloglite.onrender.com/api/posts/",
             {
                 method: "POST",
                 headers: {
@@ -164,7 +164,7 @@ function showPersonalPosts() {
         },
     };
 
-    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts?username=" + loginData.username, options)
+    fetch("https://microbloglite.onrender.com/api/posts?username=" + loginData.username, options)
         .then((response) => response.json())
         .then((posts) => {
 
@@ -224,7 +224,7 @@ function showPersonalOptions() {
         id = urlParams.get("id");
         if (id == loginData.username) {
 
-            fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
+            fetch("https://microbloglite.onrender.com/api/users/" + id,
                 {
                     method: "GET",
                     headers: {
@@ -354,7 +354,7 @@ function getProfileData() {
     if (urlParams.has("id") === true) {
         id = urlParams.get("id");
 
-        fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + id,
+        fetch("https://microbloglite.onrender.com/api/users/" + id,
             {
                 method: "GET",
                 headers: {
