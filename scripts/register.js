@@ -46,7 +46,6 @@ function registerUser(event) {
         fullName: registerForm.fullName.value,
         password: registerForm.password.value
     }
-    console.log(JSON.stringify(registerData));
 
     registerForm.registerButton.disabled = true;
 
