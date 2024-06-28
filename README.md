@@ -38,7 +38,7 @@ This project is a social media web application built using HTML, CSS, Bootstrap,
 
 ## Login Page
 
-! [Login page](/images/login.png)
+![Login page](/images/login.png)
 
 - Allows users to log in using stored credentials.
 - Utilizes API calls to authenticate users.
