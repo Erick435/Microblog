@@ -16,8 +16,6 @@ window.onload = function () {
 }
 
 function profileIcon() {
-
-    console.log("profileIcon() called");
     
     const options = {
         method: "GET",
@@ -33,13 +31,7 @@ function profileIcon() {
             window.location.href = "../microblog/profile.html?id=" + loginData.username;
 
         })
-
-        console.log(loginData.username);
-        
 }
-    
-
-
 
 function getAllPosts() {
 
