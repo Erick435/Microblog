@@ -7,7 +7,6 @@ const registerForm = document.querySelector("#register");
 
 window.onload = function () {
 
-    console.log("Script is loaded");
     password.onchange = validatePassword;
     confirmPassword.onkeyup = validatePassword;
 
@@ -40,8 +39,6 @@ function checkPasswordAfterSubmit(event) {
 
 function registerUser(event) {
     
-    console.log("registerUser() is called");
-
     event.preventDefault();
 
     const registerData = {

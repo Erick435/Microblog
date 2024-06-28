@@ -23,7 +23,7 @@ function profileIcon() {
             Authorization: `Bearer ${loginData.token}`
         },
     };
-    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", options)
+    fetch("https://microbloglite.onrender.com/api/posts", options)
         .then((response) => response.json())
         .then((userIcon) => {
 
@@ -42,7 +42,7 @@ function getAllPosts() {
         },
     };
 
-    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", options)
+    fetch("https://microbloglite.onrender.com/api/posts", options)
         .then((response) => response.json())
         .then((posts) => {
 
