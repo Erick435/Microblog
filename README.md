@@ -4,6 +4,9 @@
 
 This project is a social media web application built using HTML, CSS, Bootstrap, API, and JavaScript. The application allows users to register, log in, create posts, view posts, and interact with other users' profiles. It leverages API calls for data retrieval and user authentication.
 
+## Try It Out
+If you would like to test this web application, it has been deployed using Netlify at https://snaptalkblog.netlify.app/
+
 ## Table of Contents
 - [Navigation](#navigation)
 - [Registration and Login](#registration-and-login)
