@@ -61,7 +61,7 @@ function register(registerData){
     .then((response) => response.json())
     .then ((registerData) => {
       window.localStorage.setItem("register-data", JSON.stringify(registerData));
-      window.location.assign("../microblog/login.html");
+      window.location.assign("/login.html");
 
       return registerData;
     })
@@ -95,6 +95,6 @@ function logout() {
       // error with the fetch request above.
 
       window.localStorage.removeItem("login-data"); // remove login data from LocalStorage
-      window.location.assign("../microblog/login.html"); // redirect back to landing page
+      window.location.assign("/login.html"); // redirect back to landing page
     });
 }

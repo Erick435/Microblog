@@ -28,7 +28,7 @@ function profileIcon() {
         .then((userIcon) => {
 
             // Link to the profile page
-            window.location.href = "../microblog/profile.html?id=" + loginData.username;
+            window.location.href = "/profile.html?id=" + loginData.username;
 
         })
 }
@@ -62,7 +62,7 @@ function getAllPosts() {
 
                 // Link to the profile page
                 let profilePage = document.createElement("a")
-                profilePage.href = "../microblog/profile.html?id=" + post.username;
+                profilePage.href = "/profile.html?id=" + post.username;
                 cardBody.appendChild(profilePage);
 
                 // create card title h4
